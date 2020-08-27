@@ -1,0 +1,22 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-maxmile-develop-111359-authRole",
+            "UnauthRoleArn": "arn:aws:iam::322182352927:role/amplify-maxmile-develop-111359-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::322182352927:role/amplify-maxmile-develop-111359-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-maxmile-develop-111359-deployment",
+            "UnauthRoleName": "amplify-maxmile-develop-111359-unauthRole",
+            "StackName": "amplify-maxmile-develop-111359",
+            "StackId": "arn:aws:cloudformation:us-west-2:322182352927:stack/amplify-maxmile-develop-111359/77c96fd0-bfb4-11ea-b62a-0ab0a05de03c",
+            "AmplifyAppId": "d2eqpu98pfha6p"
+        },
+        "categories": {
+            "auth": {
+                "maxmileeab13984": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
+        }
+    }
+}
