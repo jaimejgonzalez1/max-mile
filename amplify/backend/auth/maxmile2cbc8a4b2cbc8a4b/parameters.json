@@ -1,12 +1,12 @@
 {
-    "identityPoolName": "maxmileeab13984_identitypool_eab13984",
+    "identityPoolName": "maxmile2cbc8a4b_identitypool_2cbc8a4b",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "maxmileab13984",
-    "userPoolName": "maxmileeab13984_userpool_eab13984",
+    "resourceNameTruncated": "maxmil2cbc8a4b",
+    "userPoolName": "maxmile2cbc8a4b_userpool_2cbc8a4b",
     "autoVerifiedAttributes": [
-        "email"
+        "phone_number"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
         "SMS Text Message"
     ],
@@ -14,11 +14,15 @@
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
-    "defaultPasswordPolicy": false,
+    "defaultPasswordPolicy": true,
     "passwordPolicyMinLength": 8,
-    "passwordPolicyCharacters": [],
+    "passwordPolicyCharacters": [
+        "Requires Lowercase",
+        "Requires Uppercase",
+        "Requires Numbers"
+    ],
     "requiredAttributes": [
-        "email"
+        "phone_number"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -28,11 +32,21 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "maxmileab13984_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "maxmil2cbc8a4b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "eab13984",
-    "resourceName": "maxmileeab13984",
+    "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
+    "resourceName": "maxmile2cbc8a4b2cbc8a4b",
+    "thirdPartyAuth": false,
+    "usernameAttributes": [
+        "phone_number"
+    ],
+    "userPoolGroups": false,
+    "adminQueries": true,
+    "triggers": "{}",
+    "hostedUI": false,
+    "userPoolGroupList": [],
+    "adminQueryGroup": "adminQuery",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -45,11 +59,9 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
-    "hostedUI": true,
-    "usernameAttributes": [
-        "phone_number"
-    ],
-    "userPoolGroupList": [],
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import { Dimensions, StyleSheet, Image, View } from 'react-native'
 import { Block, Button, Input, Text } from 'galio-framework'
 import { Images, argonTheme } from '../../constants'
-
+import { Auth } from 'aws-amplify'
 const { width, height } = Dimensions.get('screen')
+
 export default class SignUp extends Component {
   constructor() {
     super()
     this.gotoSignIn = this.gotoSignIn.bind(this)
+  }
+  state = {
+    phoneNumber: null,
+    password: null,
   }
 
   gotoSignIn() {
@@ -16,7 +21,23 @@ export default class SignUp extends Component {
   goToSignUp() {
     this.props.onStateChange('signUp', {})
   }
-  signUp() {}
+  async signUp() {
+    try {
+      console.log('REQUEST SENT', this.state)
+      const user = await Auth.signUp({
+        username: `+1${this.state.phoneNumber}`,
+        password: this.state.password,
+        attributes: {
+          //TODO: INCLUDE COUNTRY CODE
+          phone_number: `+1${this.state.phoneNumber}`,
+        },
+      })
+      console.log(user)
+    } catch (error) {
+      console.log('***************************************')
+      console.log('error signing in', error)
+    }
+  }
 
   render() {
     return (
@@ -29,6 +50,8 @@ export default class SignUp extends Component {
               color={argonTheme.COLORS.PRIMARY}
               style={{ borderColor: argonTheme.COLORS.PRIMARY, marginBottom: -30 }}
               placeholderTextColor={argonTheme.COLORS.PRIMARY}
+              onChangeText={(text) => (this.state.phoneNumber = text)}
+              value={this.state.phoneNumber}
               placeholder='Phone Number'
               type='numeric'
               rounded
@@ -39,6 +62,8 @@ export default class SignUp extends Component {
               style={{ borderColor: argonTheme.COLORS.PRIMARY }}
               placeholderTextColor={argonTheme.COLORS.PRIMARY}
               placeholder='Create a Password'
+              onChangeText={(text) => (this.state.password = text)}
+              value={this.state.password}
               password
               viewPass
               rounded

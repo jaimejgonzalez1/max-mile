@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, Image, View } from 'react-native'
 import { Block, Button, Input, Text } from 'galio-framework'
 import { Images, argonTheme } from '../../constants'
 import { SignIn } from 'aws-amplify-react-native'
-
+import { Auth } from 'aws-amplify'
 const { width, height } = Dimensions.get('screen')
 export default class customSignIn extends SignIn {
   constructor(props) {
@@ -21,12 +21,15 @@ export default class customSignIn extends SignIn {
   goToSignUp() {
     this.props.onStateChange('signUp', {})
   }
-  signIn() {
+
+  async signIn() {
     try {
-      console.log(this.state.phoneNumber, this.state.password)
-      super.SignIn()
+      // TODO: Add in country code
+      const user = await Auth.signIn(`+1${this.state.phoneNumber}`, this.state.password)
+      console.log(user)
     } catch (error) {
-      console.log(error)
+      console.log('***************************************')
+      console.log('error signing in', error)
     }
   }
 
