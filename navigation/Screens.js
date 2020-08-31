@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { Block } from 'galio-framework'
+import { Block, Text } from 'galio-framework'
 
 // screens
 import Onboarding from '../screens/Onboarding'

@@ -1,17 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Dimensions, StyleSheet, Image, View } from 'react-native'
 import { Block, Button, Input, Text } from 'galio-framework'
 import { Images, argonTheme } from '../../constants'
 import { SignIn } from 'aws-amplify-react-native'
 import { Auth } from 'aws-amplify'
+
 const { width, height } = Dimensions.get('screen')
+
 export default class customSignIn extends SignIn {
   constructor(props) {
     super(props)
     this.gotoSignIn = this.gotoSignIn.bind(this)
   }
   state = {
-    phoneNumber: null,
+    phoneNumber: '+1',
     password: null,
   }
 
@@ -25,8 +27,8 @@ export default class customSignIn extends SignIn {
   async signIn() {
     try {
       // TODO: Add in country code
-      const user = await Auth.signIn(`+1${this.state.phoneNumber}`, this.state.password)
-      console.log(user)
+      const user = await Auth.signIn(this.state.phoneNumber, this.state.password)
+      if (user) this.props.onStateChange('signedIn', {})
     } catch (error) {
       console.log('***************************************')
       console.log('error signing in', error)
@@ -46,7 +48,7 @@ export default class customSignIn extends SignIn {
               placeholderTextColor={argonTheme.COLORS.PRIMARY}
               placeholder='Phone Number'
               type='numeric'
-              onChangeText={(text) => (this.state.phoneNumber = text)}
+              onChangeText={(text) => this.setState({ phoneNumber: text })}
               value={this.state.phoneNumber}
               rounded
             />
@@ -56,7 +58,7 @@ export default class customSignIn extends SignIn {
               style={{ borderColor: argonTheme.COLORS.PRIMARY }}
               placeholderTextColor={argonTheme.COLORS.PRIMARY}
               placeholder='Password'
-              onChangeText={(text) => (this.state.password = text)}
+              onChangeText={(text) => this.setState({ password: text })}
               value={this.state.password}
               password
               viewPass

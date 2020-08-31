@@ -2,9 +2,18 @@ import React from 'react'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { ScrollView, StyleSheet, Image } from 'react-native'
 import { Block, Text, theme } from 'galio-framework'
+import { Auth } from 'aws-amplify'
 
 import { argonTheme } from '../constants'
 import { DrawerItem as DrawerCustomItem } from '../components'
+
+async function signOut() {
+  try {
+    await Auth.signOut()
+  } catch (error) {
+    console.log('error signing out: ', error)
+  }
+}
 
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeArea()
@@ -25,7 +34,13 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
           <Block flex style={{ marginTop: 24, marginVertical: 8, paddingHorizontal: 8 }}>
             <Block style={{ borderColor: 'rgba(0,0,0,0.2)', width: '100%', borderWidth: StyleSheet.hairlineWidth }} />
           </Block>
-          <DrawerCustomItem title='Logout' navigation={navigation} onPress />
+          <DrawerCustomItem
+            title='Logout'
+            navigation={navigation}
+            onPress={() => {
+              signOut()
+            }}
+          />
         </ScrollView>
       </Block>
     </Block>

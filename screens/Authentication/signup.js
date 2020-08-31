@@ -25,11 +25,10 @@ export default class SignUp extends Component {
     try {
       console.log('REQUEST SENT', this.state)
       const user = await Auth.signUp({
-        username: `+1${this.state.phoneNumber}`,
+        username: this.state.phoneNumber,
         password: this.state.password,
         attributes: {
-          //TODO: INCLUDE COUNTRY CODE
-          phone_number: `+1${this.state.phoneNumber}`,
+          phone_number: this.state.phoneNumber,
         },
       })
       console.log(user)
